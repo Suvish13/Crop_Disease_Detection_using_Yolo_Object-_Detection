@@ -1,0 +1,8 @@
+Flask
+gunicorn
+opencv-python
+ultralytics
+torch
+numpy
+supervision
+werkzeug
