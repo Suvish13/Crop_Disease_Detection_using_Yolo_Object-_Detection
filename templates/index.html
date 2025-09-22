@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crop Disease Detection</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'EB Garamond', serif;
+    }
+    .container {
+      margin-top: 60px;
+      text-align: center;
+      flex: 1;
+    }
+    .title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #2e7d32;
+      margin-bottom: 20px;
+      
+    }
+    .description {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+      line-height: 1.6;
+    }
+    .upload-box {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+    .btn-upload {
+      background-color: #388e3c;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+    .btn-upload:hover {
+      background-color: #2e7d32;
+    }
+    .result-img {
+      margin-top: 30px;
+      border-radius: 10px;
+      max-width: 80%;
+      height: auto;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    }
+    .disease-summary {
+      margin-top: 20px;
+      text-align: left;
+      display: inline-block;
+    }
+    footer {
+      background: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 40px;
+    }
+    footer img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 3px solid #fff;
+    }
+    .footer-buttons a {
+      margin: 5px;
+    }
+    .btn-custom {
+      background-color: #ffffff;
+      color: #2e7d32;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn-custom:hover {
+      background-color: #dcedc8;
+      color: #1b5e20;
+    }
+    .btn-linkedin {
+      background-color: #0a66c2;
+      color: white;
+    }
+    .btn-linkedin:hover {
+      background-color: #004182;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Crop Disease Detection</div>
+
+    <div class="description">
+      Unmanned Aerial Vehicles (UAVs) equipped with advanced cameras and sensors are transforming modern agriculture. 
+      High-resolution UAV images help detect crop diseases early by capturing subtle changes in leaf color, texture, 
+      and canopy structure. By combining UAV imagery with deep learning models like YOLO, farmers can make 
+      data-driven decisions to improve yield, reduce losses, and ensure sustainable farming practices.
+    </div>
+    <div class="upload-box">
+      <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" class="form-control mb-3" required>
+        <button type="submit" class="btn btn-upload">Upload & Detect</button>
+      </form>
+    </div>
+
+    {% if error %}
+      <div class="alert alert-danger mt-3">{{ error }}</div>
+    {% endif %}
+
+    {% if output_image %}
+      <div class="result">
+        <h4 class="mt-4">Detection Result</h4>
+        <img src="{{ output_image }}" class="result-img" alt="Detected Image">
+        
+        {% if disease_summary %}
+          <div class="disease-summary mt-3">
+            <h5>Disease Summary:</h5>
+            <ul class="list-group">
+              {% for disease, count in disease_summary.items() %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ disease }}
+                  <span class="badge bg-success rounded-pill">{{ count }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+   <footer>
+    <div class="container d-flex justify-content-center align-items-center flex-wrap">
+
+      <div class="me-3">
+      </div>
+
+      <div class="text-start">
+        <h5 class="mb-1"><strong>Suvish S</strong></h5>
+        <p class="mb-2">Geospatial science professional with hands-on experience in geospatial analysis, remote sensing, and decision support using advanced GIS technologies. Proficient in ArcGIS, QGIS, ENVI, Google Earth Engine, and FME, with strong Python skills for automating spatial workflows and data processing. Experienced in developing web-based GIS applications, managing satellite imagery, and building geospatial databases. Skilled in delivering actionable insights for environmental monitoring, location intelligence, disaster management, and precision agriculture</p>
+        <div class="footer-buttons">
+          <a href="https://arcg.is/Kb9WH0" target="_blank" class="btn btn-custom">
+            Portfolio
+          </a>
+          <a href="https://www.linkedin.com/in/suvish-s-1537941b1/" target="_blank" class="btn btn-custom">
+            LinkedIn Profile
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
